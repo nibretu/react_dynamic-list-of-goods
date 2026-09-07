@@ -1,5 +1,5 @@
 import React from 'react';
-import { Good } from './api/goods';
+import { Good } from './types/Good';
 
 type Props = {
   goods: Good[];

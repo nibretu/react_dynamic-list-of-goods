@@ -1,8 +1,4 @@
-export interface Good {
-  id: number;
-  name: string;
-  color: string;
-}
+import { Good } from '../types/Good';
 
 export function getAll(): Promise<Good[]> {
   return fetch(
