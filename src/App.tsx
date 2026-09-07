@@ -6,33 +6,62 @@ import { Good } from './types/Good';
 
 type State = {
   goods: Good[];
+  error: string;
 };
 
 export class App extends React.Component<{}, State> {
   state: State = {
     goods: [],
+    error: '',
   };
 
   loadAll = () => {
-    getAll().then(goods => {
-      this.setState({ goods });
-    });
+    getAll()
+      .then(goods => {
+        this.setState({
+          goods,
+          error: '',
+        });
+      })
+      .catch(() => {
+        this.setState({
+          error: 'Failed to load goods',
+        });
+      });
   };
 
   load5First = () => {
-    get5First().then(goods => {
-      this.setState({ goods });
-    });
+    get5First()
+      .then(goods => {
+        this.setState({
+          goods,
+          error: '',
+        });
+      })
+      .catch(() => {
+        this.setState({
+          error: 'Failed to load goods',
+        });
+      });
   };
 
   loadRed = () => {
-    getRed().then(goods => {
-      this.setState({ goods });
-    });
+    getRed()
+      .then(goods => {
+        this.setState({
+          goods,
+          error: '',
+        });
+      })
+      .catch(() => {
+        this.setState({
+          error: 'Failed to load goods',
+        });
+      });
   };
 
   render() {
-    const { goods } = this.state;
+    const { goods, error } = this.state;
 
     return (
       <div className="App">
@@ -53,6 +82,8 @@ export class App extends React.Component<{}, State> {
         <button type="button" data-cy="red-button" onClick={this.loadRed}>
           Load red goods
         </button>
+
+        {error && <p>{error}</p>}
 
         <GoodsList goods={goods} />
       </div>
